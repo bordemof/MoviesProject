@@ -1,0 +1,55 @@
+<movies>
+	<movie ID="IH000000001">
+            <genres>
+                <genre>Action</genre>
+                <genre>Adventure</genre>
+                <genre>Thriller</genre>
+            </genres>
+            <tags>
+                <tag>Rock</tag>
+                <tag>SanFrancisco</tag>
+            </tags>
+
+            <title>The Rock</title>
+
+            <year>1996</year>
+
+            <director>Michael Bay</director>
+
+            <cast>
+                <actor>Sean Conery </actor>
+                <actor>Nicolas Cage </actor>
+                <actor>Ed Harris </actor>
+                <actor>John Spencer </actor>
+            </cast>
+
+            <popularity>98</popularity>
+	</movie>
+        <movie ID="IH000000002">
+            <genres>
+                <genre>Crime</genre>
+                <genre>Drama</genre>
+                <genre>Sci-Fi</genre>
+            </genres>
+            <tags>
+                <tag>Orange</tag>
+                <tag>Clockwork</tag>
+            </tags>
+
+            <title>A Clockwork Orange</title>
+
+            <year>1971</year>
+
+            <director>Stanley Kubrick</director>
+
+            <cast>
+                <actor>Malcolm McDowell </actor>
+                <actor>Patrick Magee </actor>
+                <actor>Michael Bates </actor>
+                <actor>Warren Clarke </actor>
+                <actor>Adrienne Corri </actor>
+            </cast>
+
+            <popularity>99</popularity>
+	</movie>
+</movies>
