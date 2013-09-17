@@ -51,13 +51,21 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         }
      
     }
-    
+    /**
+     *  Inserts a Movie in the frame Table
+     *  
+     *  @param The movie that is going to be added.
+     */
     public void insertMovieInPlaylistTable(Movie mov){
         
         tbm.insertRow(this.playlistTable.getRowCount(), new Object[]{});     
         tbm.setValueAt(mov.getTitle(), this.playlistTable.getRowCount()-1, 0);
     }
-    
+    /**
+     *  Fills the genres comboBox with all the data options
+     *  
+     *  @param The list of genres to add
+     */
     public void loadGenreComboBox(List<String> genres){
         
         for (String s : genres){
@@ -66,6 +74,11 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         }
       
     }
+    /**
+     *  Fills the tags comboBox with all the data options
+     *  
+     *  @param The list of tags to add
+     */
     public void loadTagComboBox(List<String> tags){
            
         for (String t : tags){
@@ -73,6 +86,11 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
             this.tagComboBox.addItem(t);
         }
     }
+    /**
+     *  Fills the movie JList with all the movies
+     *  
+     *  @param The list of movies to add
+     */
     public void loadJList(List<Movie> movies){
         String[] titleList;
         titleList = new String[movies.size()];
@@ -83,7 +101,10 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         }
        this.resultJList.setListData(titleList);
     }
-    
+    /**
+     *  Hides the movie info labels of the Form
+     *  
+     */
     public void hideInfo(){
         
         this.titleInfoLabel.setVisible(false);
@@ -94,10 +115,18 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         this.directorInfoLabel.setVisible(false);
         this.tagInfoLabel.setVisible(false);
     }
+    /**
+     *  Shows the movie info labels of the Form
+     *  
+     */
     public void showInfo(Movie mov){
         
+    	//Sets the label with the movie title
         this.titleInfoLabel.setText("Title : "+mov.getTitle());
+        //Sets the label with the movie year
         this.yearInfoLabel.setText(("Year : "+mov.getYear()));
+        
+        //Sets the label with the movie genres
         String genres = "Genres : ";
         for (String s : mov.getGenres()){
             genres += s+", ";
@@ -106,6 +135,7 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         genres +=".";
         this.genreInfoLabel.setText(genres);
         
+        //Sets the label with direction info
         String direction = "Direction : ";
         for (Person p : mov.getDirection()){
             direction += p.getName()+", ";
@@ -114,6 +144,7 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         direction +=".";
         this.directorInfoLabel.setText(direction);
         
+        //Sets the label with the movie cast
         String cast = "<html>Cast : <br> ";
         for (Person p : mov.getCast()){
             cast += "<p>";
@@ -126,14 +157,16 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         cast +="</html>";
         this.castInfoLabel.setText(cast);
         
+        //Sets the label with the movie tags
         String tags = "Tags : ";
         for (String s : mov.getTags()){
             tags += s+", ";
         }
         tags = tags.substring(0, tags.length()-2);
         tags +=".";
-        this.tagInfoLabel.setText(tags);
+        this.tagInfoLabel.setText(tags);  
         
+        //Change the labels visibility
         this.titleInfoLabel.setVisible(true);
         this.yearInfoLabel.setVisible(true);
         this.genreInfoLabel.setVisible(true);
@@ -141,10 +174,14 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         this.directorInfoLabel.setVisible(true);
         this.tagInfoLabel.setVisible(true);
     }
-   
+    /**
+     *  Constructor of all the JframeForm elements and its
+     *  configuration style parameters
+     */
     @SuppressWarnings("all") 
     private void initComponents() {
 
+    	//Components construction
         jScrollPane1 = new javax.swing.JScrollPane();
         resultJList = new javax.swing.JList();
         genreComboBox = new javax.swing.JComboBox();
@@ -177,14 +214,18 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         savePlaylistButton = new javax.swing.JButton();
 
+        //Event of System exit when window closing
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //Sets the window title
         setTitle("Iron Hack Movies Code Test");
 
+        //Loads the Jlist with items
         resultJList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        //Adds the Jlist listener for mouse events
         resultJList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 resultJListMouseClicked(evt);
@@ -198,7 +239,8 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
                 genreComboBoxActionPerformed(evt);
             }
         });
-
+        
+        //Sets the text to he labels
         titleLabel.setText("Title :");
 
         directorLabel.setText("Director :");
@@ -206,12 +248,13 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         castLabel.setText("Cast :");
 
         searchButton.setText("Search");
+        //Adds an action listener to the search Button
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
             }
         });
-
+        //Sets the text to he label
         genresLabel.setText("Genres :");
 
         orderByPopularityLabel.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
@@ -332,6 +375,7 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
             }
         });
 
+        //Configuration settings of teh layaout (Position,font,etc...)
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -483,13 +527,23 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
 
 
      
-
+    /**
+     *  Sorts the Jlist movies by popularity
+     *  
+     *  @param Event of clicking the label
+     */
     private void orderByPopularityLabelMouseClicked(java.awt.event.MouseEvent evt) {
        
         ml.sortByPopularity();
         this.loadJList(ml.getLibrary());
     }
-
+    /**
+     *  The button search, reads all the fields and comboxs parameters
+     *  and search them all in the movie libary, then show the results 
+     *  in the JList
+     *  
+     *  @param Event of clicking the button
+     */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {
         
        String filterTitle = this.titleTextField.getText();
@@ -501,6 +555,13 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
        this.loadJList(ml.filerByTitleCastDirectorGenreTag(filterTitle,filterActor,filterDirector,filterGenre, filterTag ));
     }
 
+    /**
+     *  The genre ComboBox, reads all the fields and comboxs parameters
+     *  and search them all in the movie libary, then show the results 
+     *  in the JList
+     *  
+     *  @param Event when changing its selected value
+     */
     private void genreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
         
       String filterTitle = this.titleTextField.getText();
@@ -511,7 +572,13 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
 
       this.loadJList(ml.filerByTitleCastDirectorGenreTag(filterTitle,filterActor,filterDirector,filterGenre, filterTag ));
     }
-
+    /**
+     *  The tag ComboBox, reads all the fields and comboxs parameters
+     *  and search them all in the movie libary, then show the results 
+     *  in the JList
+     *  
+     *  @param Event when changing its selected value
+     */
     private void tagComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
        
         
@@ -524,6 +591,12 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
       this.loadJList(ml.filerByTitleCastDirectorGenreTag(filterTitle,filterActor,filterDirector,filterGenre, filterTag ));
     }
 
+    /**
+     *  The addPlayListButton, reads the selected value of the Jlist
+     *  and puts it in the playlist JTable.
+     *  
+     *  @param Event when clicking button
+     */
     private void addToPlayListActionPerformed(java.awt.event.ActionEvent evt) {
         
        if (this.resultJList.getSelectedValue()!=null){
@@ -535,12 +608,21 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
        }
     
     }
-
+    /**
+     *  Loads all the movies in the library in the Jlist
+     *  
+     *  @param Event when clicking button
+     */
     private void viewAllMoviesButtonActionPerformed(java.awt.event.ActionEvent evt) {
       
        this.loadJList(ml.getLibrary());
     }
 
+    /**
+     *  Clears all the playlist of the JTable
+     *  
+     *  @param Event when clicking button
+     */
     private void clearPlayListButtonActionPerformed(java.awt.event.ActionEvent evt) {
         
         DefaultTableModel tbm = (DefaultTableModel)this.playlistTable.getModel();
@@ -551,6 +633,12 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
             this.hideInfo();
     }
 
+    /**
+     *  The addAllPlayListButton, reads all the values of the Jlist
+     *  and puts them in the playlist JTable.
+     *  
+     *  @param Event when clicking button
+     */
     private void addAllToPlaylistButtonActionPerformed(java.awt.event.ActionEvent evt) {
         
          this.playlistTable.setVisible(true);
@@ -561,7 +649,12 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
             this.insertMovieInPlaylistTable(m);
         }
     }
-
+    /**
+     *  When clicking a component of the table it shows
+     *  its movie information in the labels
+     *  
+     *  @param Event when clicking Component
+     */
     private void playlistTableMouseClicked(java.awt.event.MouseEvent evt) {
         
         int row = this.playlistTable.getSelectedRow();
@@ -570,7 +663,12 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         this.showInfo(m);
       
     }
-
+    /**
+     *  The up button advances the selected element
+     *  one position in the table
+     *  
+     *  @param Event when clicking the up Button
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         
         int row = this.playlistTable.getSelectedRow();
@@ -584,7 +682,12 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
        
         
     }
-
+    /**
+     *  The down button postpones the selected element
+     *  one position in the table
+     *  
+     *  @param Event when clicking the down Button
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         
         int row = this.playlistTable.getSelectedRow();
@@ -596,7 +699,12 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
         
         }
     }
-
+    /**
+     *  When clicking one element in the JList it shows
+     *  the element information in the labels.
+     *  
+     *  @param Event when clicking a element of the list
+     */
     private void resultJListMouseClicked(java.awt.event.MouseEvent evt) {
        
          if (this.resultJList.getSelectedValue()!=null){
@@ -608,7 +716,16 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
               
        }
     }
-
+    /**
+     *  The IMDB button reads the title of the selected
+     *  element of the JList and it searches it in the 
+     *  InternetMovieDatabae through IMDBInfoGathering
+     *  interface, if the movie is found it launches a
+     *  internet web browser to the URL,in case of unrecognized
+     *  title it takes a message in console.
+     *  
+     *  @param Event when clicking the IMDB Button
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
         
           if (this.resultJList.getSelectedValue()!=null){
@@ -626,7 +743,12 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
        }
         
     }
-
+    /**
+     *  Saves the Jtable´s playlist values to file throuh the
+     *  FileOutput interface
+     *  
+     *  @param Event when clicking the Save Button
+     */
     private void savePlaylistButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	
         List<Movie> result = new ArrayList<Movie>();
@@ -667,7 +789,7 @@ public class MovieLibraryInterface extends javax.swing.JFrame {
             }
         });
     }
-    
+    //Component declaration
     private javax.swing.JTextField actorTextField;
     private javax.swing.JButton addAllToPlaylistButton;
     private javax.swing.JButton addToPlayList;

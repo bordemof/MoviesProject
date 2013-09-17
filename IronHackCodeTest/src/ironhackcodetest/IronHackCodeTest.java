@@ -22,6 +22,8 @@ import org.xml.sax.SAXException;
 public class IronHackCodeTest {
 
     /**
+     * Main method to launch the Layout of the application
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
